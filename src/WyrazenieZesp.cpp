@@ -1,7 +1,8 @@
+#include <iomanip>
+#include <iostream>
 #include "WyrazenieZesp.hh"
 
-
-/*
- * Tu nalezy zdefiniowac funkcje, ktorych zapowiedzi znajduja sie
- * w pliku naglowkowym.
- */
+void Wyswietl(LZespolona Skl1)
+{
+    std::cout << Skl1.re << std::showpos << Skl1.im;
+}

@@ -1,5 +1,5 @@
-#ifndef WYRAZENIEZESP_HH
-#define WYRAZENIEZESP_HH
+#ifndef STATYSTYKI_HH
+#define STATYSTYKI_HH
 
 
 
