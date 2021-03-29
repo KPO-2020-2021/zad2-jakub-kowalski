@@ -10,11 +10,11 @@
 * Zwraca:
 *   Liczbe poprawnych i blednych odpowiedzi oraz procent poprawnych odpowiedzi
 */
-void statystyki(int poprawne, int niepoprawne)
+void statystyki(int poprawne, int niepoprawne, int ilosc)
 {
-    int wynik;
+    int procent;
     std::cout << "Ilosc poprawnych odpowiedzi: " << poprawne << std::endl;
     std::cout << "Ilosc blednych odpowiedzi: " << niepoprawne << std::endl;
-    wynik = poprawne / 4 * 100;
-    std::cout << "Procent poprawnych odpowiedzi: " << wynik << "%" << std::endl;
+    procent = poprawne / ilosc * 100;
+    std::cout << "Procent poprawnych odpowiedzi: " << procent << "%" << std::endl;
 }

@@ -1,6 +1,42 @@
 #include <cmath>
 #include <iostream>
+#include <stdexcept>
 #include "LZespolona.hh"
+
+int poprawne = 0, niepoprawne = 0, ilosc = 0;
+
+
+/*!
+ * Porownuje czy liczba wczytana jest taka sama jak oczekiwany wynik.
+ */
+bool  operator == (LZespolona  Skl1,  LZespolona  Skl2)
+{
+  if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
+  {        
+    poprawne++;
+    ilosc++;                   
+    return true;
+  }                                                                
+  else
+  {         
+    niepoprawne++;    
+    ilosc++;                                                             
+    return false; 
+  }                                                                                  
+}
+
+
+bool  operator != (LZespolona  Skl1,  LZespolona  Skl2)
+{
+  if ((Skl1.re != Skl2.re) || (Skl1.im != Skl2.im))
+  {                         
+    return true;
+  }                                                                
+  else
+  {                                                                    
+    return false; 
+  }                                                                                  
+}
 
 
 /*!
@@ -69,9 +105,16 @@ LZespolona  operator / (LZespolona  Skl1, LZespolona  Skl2)
 {
   LZespolona  Wynik;
 
-  Wynik.re = ((Skl1.re * Skl2.re) + (Skl1.im * Skl2.im)) / (pow(Skl2.re, 2)+pow(Skl2.im, 2));
-  Wynik.im = ((Skl2.re * Skl1.im) - (Skl1.re * Skl2.im)) / (pow(Skl2.re, 2)+pow(Skl2.im, 2));
-  return Wynik;
+  if((pow(Skl2.re, 2) + pow(Skl2.im, 2)) == 0)
+  {
+    throw std::runtime_error("Proba dzielenia przez zero");
+  }
+  else
+  {
+    Wynik.re = ((Skl1.re * Skl2.re) + (Skl1.im * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2));
+    Wynik.im = ((Skl2.re * Skl1.im) - (Skl1.re * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2));
+    return Wynik;
+  }
 }
 
 

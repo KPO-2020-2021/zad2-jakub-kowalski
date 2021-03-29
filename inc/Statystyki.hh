@@ -4,6 +4,6 @@
 #include "LZespolona.hh"
 #include "WyrazenieZesp.hh"
 
-void Statystyki(int poprawne, int niepoprawne);
+void Statystyki(int poprawne, int niepoprawne, int ilosc);
 
 #endif

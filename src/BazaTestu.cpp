@@ -16,13 +16,16 @@ static WyrazenieZesp  TestLatwy[] =
     {{4,8}, Op_Dziel, {1,0}},
   };
 
+
 /*
- * Analogicznie zdefiniuj test "trudne"
- *
+ * Analogicznie dla testu trudnego.
  */
-
-
-
+static WyrazenieZesp  TestTrudny[] =
+  { {{24,22}, Op_Dodaj, {13,14}},
+    {{3,21}, Op_Odejmij, {11,10}},
+    {{3,3}, Op_Mnoz, {7,5}},
+    {{7,4}, Op_Dziel, {2,3}},
+  };
 
 
 /*
@@ -50,8 +53,6 @@ void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned in
 }
 
 
-
-
 /*
  * Inicjalizuje test kojarzac zmienna dostepna poprzez wskaznik wskBazaTestu
  * z dana tablica wyrazen, ktora reprezentuje jeden z dwoch dopuszczalnych 
@@ -77,14 +78,15 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
     UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
     return true;
   }
-  /*
-   * Analogicznie zrob inicjalizacje dla testu trudne
-   */
+
+if (!strcmp(sNazwaTestu,"trudny")) {
+    UstawTest(wskBazaTestu,TestTrudny,sizeof(TestTrudny)/sizeof(WyrazenieZesp));
+    return true;
+  }
 
   cerr << "Otwarcie testu '" << sNazwaTestu << "' nie powiodlo sie." << endl;
   return false;
 }
-
 
 
 /*!
