@@ -28,7 +28,8 @@ int main(int argc, char **argv)
   WyrazenieZesp   WyrZ_PytanieTestowe;
   LZespolona popr_odpowiedz;
   LZespolona odpowiedz;
-  
+  Statystyka stat;
+
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
     std::cout << WyrZ_PytanieTestowe << std::endl;
 
@@ -66,6 +67,8 @@ int main(int argc, char **argv)
         {
           std::cout << "Odpowiedz poprawna." << std::endl;
           std::cout << std::endl;
+          stat.poprawne++;
+          stat.ilosc++;
           break;
         }
         else if((odpowiedz != popr_odpowiedz) && (std::cin.good()))
@@ -73,17 +76,23 @@ int main(int argc, char **argv)
           std::cout << "Udzielona odpowiedz jest niepoprawna." << std::endl;
           std::cout << "Poprawna odpowiedz to: " << popr_odpowiedz << std::endl;
           std::cout << std::endl;
+          stat.niepoprawne++;
+          stat.ilosc++;
           break;
         }
       } 
       if(proby == 0)
       {
       std::cout << "Wykorzystales wszystkie proby. Odpowiedz zostaje uznana za niepoprawna." << std::endl; 
+      stat.niepoprawne++;
+      stat.ilosc++;
       }
       std::cout << std::endl;
     } 
   }
   
+  std::cout << std::endl;
+  Statystyki(stat.poprawne, stat.niepoprawne, stat.ilosc);
   std::cout << std::endl;
   std::cout << "Koniec testu" << std::endl;
   std::cout << std::endl;

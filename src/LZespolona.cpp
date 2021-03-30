@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include "LZespolona.hh"
 
-int poprawne = 0, niepoprawne = 0, ilosc = 0;
-
 
 /*!
  * Porownuje czy liczba wczytana jest taka sama jak oczekiwany wynik.
@@ -12,15 +10,11 @@ int poprawne = 0, niepoprawne = 0, ilosc = 0;
 bool  operator == (LZespolona  Skl1,  LZespolona  Skl2)
 {
   if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
-  {        
-    poprawne++;
-    ilosc++;                   
+  {                          
     return true;
   }                                                                
   else
-  {         
-    niepoprawne++;    
-    ilosc++;                                                             
+  {                                                                    
     return false; 
   }                                                                                  
 }
@@ -87,7 +81,7 @@ LZespolona  operator * (LZespolona  Skl1, LZespolona  Skl2)
 {
   LZespolona  Wynik;
 
-  Wynik.re = (Skl1.re * Skl1.im) - (Skl2.re * Skl2.im);
+  Wynik.re = (Skl1.re * Skl2.re) - (Skl1.im * Skl2.im);
   Wynik.im = (Skl1.re * Skl2.im) + (Skl2.re * Skl1.im);
   return Wynik;
 }
@@ -115,6 +109,27 @@ LZespolona  operator / (LZespolona  Skl1, LZespolona  Skl2)
     Wynik.im = ((Skl2.re * Skl1.im) - (Skl1.re * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2));
     return Wynik;
   }
+}
+
+
+/*!
+ * Realizuje dzielenie dwoch liczb zespolonych.
+ * Argumenty:
+ *    Skl1 - pierwszy skladnik dzielenia,
+ *    Skl2 - drugi skladnik dzielenia - liczba rzeczywista.
+ * Zwraca:
+ *    Iloraz dwoch skladnikow przekazanych jako parametry.
+ */
+LZespolona  operator / (LZespolona  Skl1,  double  Skl2)
+{
+  if (Skl2 == 0)
+  {
+    throw std::runtime_error("Proba dzielenia przez zero");
+  }
+  LZespolona  Wynik;
+  Wynik.re = Skl1.re / Skl2;
+  Wynik.im = Skl1.im / Skl2;
+  return Wynik;
 }
 
 
