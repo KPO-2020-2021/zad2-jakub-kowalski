@@ -1,6 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "./doctest/doctest.h"
 #include "LZespolona.hh"
+#include <stdio.h>
 
 TEST_CASE("Test sumowania"){
     LZespolona x, y, z;
@@ -61,4 +62,3 @@ TEST_CASE("Dodawanie (0.00001+0.00001i)"){
     
     CHECK(x+y == z);
 }
-

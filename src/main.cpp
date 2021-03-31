@@ -96,4 +96,35 @@ int main(int argc, char **argv)
   std::cout << std::endl;
   std::cout << "Koniec testu" << std::endl;
   std::cout << std::endl;
+
+  LZespolona a, b, c, d, e;
+
+  a.re = 2;
+  a.im = 2;
+
+  b.re = -1;
+  b.im = 1;
+  
+  c.re = 0;
+  c.im = 1;
+  
+  d.re = 0;
+  d.im = -1;
+
+  e.re = 0;
+  e.im = 0;
+  
+  try
+  {
+    arg(a);
+    arg(b);
+    arg(c);
+    arg(d);
+    arg(e);
+  }
+  catch (std::runtime_error& e)
+  {  
+    std::cout << "Pojawil sie wyjatek." << std::endl << e.what();
+    std::cout << std::endl;
+  }
 }

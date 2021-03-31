@@ -51,6 +51,19 @@ LZespolona  operator + (LZespolona  Skl1, LZespolona  Skl2)
 }
 
 
+
+LZespolona operator += (LZespolona &Skl1, LZespolona const &Skl2)
+{
+  LZespolona  Wynik;
+  Wynik.re = 0;
+  Wynik.im = 0;
+
+  Wynik.re = Wynik.re + Skl1.re + Skl2.re;
+  Wynik.im = Wynik.im + Skl1.im + Skl2.im;
+  return Wynik;
+}
+
+
 /*!
  * Realizuje odejmowanie dwoch liczb zespolonych.
  * Argumenty:
@@ -112,6 +125,41 @@ LZespolona  operator / (LZespolona  Skl1, LZespolona  Skl2)
 }
 
 
+LZespolona  operator /= (LZespolona &Skl1, LZespolona const &Skl2)
+{
+  LZespolona  Wynik;
+  Wynik.re = 0;
+  Wynik.im = 0;
+
+  if((pow(Skl2.re, 2) + pow(Skl2.im, 2)) == 0)
+  {
+    throw std::runtime_error("Proba dzielenia przez zero");
+  }
+  else
+  {
+    if((Wynik.re != 0) && (Wynik.im != 0))
+    {
+      if(((Skl1.re * Skl2.re) + (Skl1.im * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2)) && (Wynik.im / ((Skl2.re * Skl1.im) - (Skl1.re * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2))) == 0)
+      {
+        throw std::runtime_error("Proba dzielenia przez zero");
+      }
+      else
+      {
+        Wynik.re = (Wynik.re / ((Skl1.re * Skl2.re) + (Skl1.im * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2)));
+        Wynik.im = (Wynik.im / ((Skl2.re * Skl1.im) - (Skl1.re * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2)));
+      }
+    }
+    else
+    {
+      Wynik.re = ((Skl1.re * Skl2.re) + (Skl1.im * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2));
+      Wynik.im = ((Skl2.re * Skl1.im) - (Skl1.re * Skl2.im)) / (pow(Skl2.re, 2) + pow(Skl2.im, 2));
+    }
+    
+    return Wynik;
+  }
+}
+
+
 /*!
  * Realizuje dzielenie dwoch liczb zespolonych.
  * Argumenty:
@@ -167,4 +215,38 @@ std::istream & operator >> (std::istream &strm, LZespolona &Skl1)
   }
   
   return strm;
+  
+}
+
+void arg (LZespolona z)
+{
+  double fi;
+
+  if(z.re > 0)
+  {
+    fi = atan2(z.im, z.re);
+  }
+
+  if(z.re < 0)
+  {
+    fi = atan2(z.im, z.re) + M_PI;
+  }
+  
+  if(z.re == 0)
+  {
+    if(z.im > 0)
+    {
+      fi = M_PI/2;
+    }
+    if(z.im < 0)
+    {
+      fi = -1 * M_PI/2;
+    }
+    if(z.im == 0)
+    {
+      throw std::runtime_error("Argument nieokreslony.");
+    }
+  }
+
+  std::cout << "Argument glowny fi wynosi: " << fi << std::endl;
 }

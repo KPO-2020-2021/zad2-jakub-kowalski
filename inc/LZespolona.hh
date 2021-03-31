@@ -24,11 +24,14 @@ struct  LZespolona {
 bool  operator == (LZespolona  Skl1, LZespolona  Skl2);
 bool  operator != (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona  operator + (LZespolona  Skl1, LZespolona  Skl2);
+LZespolona operator += (LZespolona &Skl1, LZespolona const &Skl2);
 LZespolona  operator - (LZespolona  Skl1, LZespolona  Skl2);
 LZespolona  operator * (LZespolona  Skl1, LZespolona  Skl2);
 LZespolona  operator / (LZespolona  Skl1, LZespolona  Skl2);
 LZespolona  operator / (LZespolona  Skl1,  double  Skl2);
+LZespolona  operator /= (LZespolona &Skl1, LZespolona const &Skl2);
 std::ostream & operator << (std::ostream & s, LZespolona Skl1);
 std::istream & operator >> (std::istream &strm, LZespolona &Skl1);
+void arg (LZespolona z);
 
 #endif
